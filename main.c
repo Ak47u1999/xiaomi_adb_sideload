@@ -606,7 +606,7 @@ int main(int argc, char** argv) {
     dev_handle = NULL;
 
     // quick hack to use TERMUX-USB 
-    char *fd_s = getenv("TERMUX_USB_FD");
+/*     char *fd_s = getenv("TERMUX_USB_FD");
     if(fd_s != NULL) {
         int fd = atoi(fd_s);
         if(scan_for_device_from_fd(fd)) {
@@ -618,7 +618,7 @@ int main(int argc, char** argv) {
             printf("No device found\n");
             return 1;
         }
-    }
+    } */
 
     codename = (char *)malloc(64);
     version = (char *)malloc(64);
@@ -629,16 +629,25 @@ int main(int argc, char** argv) {
     region = (char *)malloc(64);
     romzone = (char *)malloc(64);
 
+    strcpy(codename, "duchamp_in_global");  
+    strcpy(version, "V816.0.16.UNLINXM");
+    strcpy(serial_num, "0x47efd5580e5d1e6a515cf54067557d308d6c45f949cdd89f04155d5a");
+    strcpy(codebase, "14");
+    strcpy(branch, "F");
+    strcpy(lang, "en");
+    strcpy(region, "IN");
+    strcpy(romzone, "2");
+
     bool connection = true;
     bool readinfo = true;
-    if(sideloadfile != NULL) {
+/*     if(sideloadfile != NULL) {
         readinfo = false;
-    }
+    } */
 
-    if(connect_device_read_info(readinfo)) {
+/*     if(connect_device_read_info(readinfo)) {
         printf("Failed to connect with device\n");
         connection = false;
-    }
+    } */
 
     char buf[256];
     if (connection) {
@@ -672,7 +681,7 @@ int main(int argc, char** argv) {
             printf("Device formatted successfully\n");
         }
 
-        send_recovery_commands("reboot:", buf);
+        send_recovery_commands("reboot sideload:", buf);
     }
 
     free(codename);

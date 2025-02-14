@@ -1,5 +1,8 @@
 *.o
 *.zip
-.vscode
 main.dSYM
 .DS_Store
+7zz
+validate.key
+.vscode/*
+.gitignore
